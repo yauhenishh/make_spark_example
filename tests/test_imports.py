@@ -1,17 +1,11 @@
 """Test to verify imports work correctly."""
 
+import path_helper  # This sets up the path
 import os
-import sys
-from pathlib import Path
 
 
 def test_imports():
     """Test that we can import all necessary modules."""
-    # Ensure parent directory is in path
-    parent_dir = Path(__file__).parent.parent
-    if str(parent_dir) not in sys.path:
-        sys.path.insert(0, str(parent_dir))
-
     # Try imports
     try:
         from src.data.loader import DataLoader
@@ -21,17 +15,18 @@ def test_imports():
     except ImportError as e:
         print(f"✗ Failed to import DataLoader: {e}")
         print(f"  Current directory: {os.getcwd()}")
-        print(f"  Python path: {sys.path}")
         print(f"  Directory contents: {os.listdir('.')}")
+        if 'src' in os.listdir('.'):
+            print(f"  src/ contents: {os.listdir('src')}")
         raise
 
     try:
-        from src.analysis.tasks import AnalysisTasks
+        from src.analysis.tasks import MerchantAnalysis
 
-        assert AnalysisTasks is not None
-        print("✓ Successfully imported AnalysisTasks")
+        assert MerchantAnalysis is not None
+        print("✓ Successfully imported MerchantAnalysis")
     except ImportError as e:
-        print(f"✗ Failed to import AnalysisTasks: {e}")
+        print(f"✗ Failed to import MerchantAnalysis: {e}")
         raise
 
 

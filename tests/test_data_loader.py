@@ -1,7 +1,4 @@
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).parent.parent))
+import path_helper  # This sets up the path
 
 from src.data.loader import DataLoader
 

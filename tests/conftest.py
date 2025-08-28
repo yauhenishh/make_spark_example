@@ -1,3 +1,5 @@
+import path_helper  # This sets up the path - must be first import
+
 import shutil
 import tempfile
 from datetime import datetime

@@ -9,6 +9,10 @@ install-dev:
 test:
 	pytest tests/ -v --cov=src --cov-report=html --cov-report=term
 
+test-ci:
+	@echo "Running tests in CI mode..."
+	./run_tests_ci.sh
+
 lint:
 	# Run ruff linting
 	ruff check src tests

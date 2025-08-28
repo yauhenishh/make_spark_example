@@ -1,0 +1,61 @@
+# Example GitHub Actions workflow for running tests
+# Rename this file to .github/workflows/test.yml to use it
+
+name: Tests
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11']
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install Java for PySpark
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        pip install -r requirements.txt
+        pip install -r requirements-dev.txt
+    
+    - name: Install package in development mode
+      run: |
+        pip install -e .
+    
+    - name: Set PYTHONPATH and run tests
+      env:
+        PYTHONPATH: ${{ github.workspace }}
+      run: |
+        echo "Current directory: $(pwd)"
+        echo "PYTHONPATH: $PYTHONPATH"
+        echo "Directory contents:"
+        ls -la
+        echo "Python path:"
+        python -c "import sys; print('\n'.join(sys.path))"
+        
+        # Run tests with explicit module execution
+        python -m pytest tests/ -v --tb=short --cov=src --cov-report=xml
+    
+    # Alternative: Use the CI script
+    # - name: Run tests using CI script
+    #   run: |
+    #     chmod +x run_tests_ci.sh
+    #     ./run_tests_ci.sh
