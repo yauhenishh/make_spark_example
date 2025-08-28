@@ -13,7 +13,7 @@ lint:
 	# Run ruff linting
 	ruff check src tests
 	# Run mypy type checking
-	mypy src tests
+	cd . && mypy src/ tests/ --explicit-package-bases
 
 format:
 	# Run ruff formatting

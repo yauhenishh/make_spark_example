@@ -7,7 +7,7 @@ parent_dir = Path(__file__).parent.parent
 sys.path.insert(0, str(parent_dir))
 
 # Also set PYTHONPATH environment variable
-os.environ['PYTHONPATH'] = str(parent_dir)
+os.environ["PYTHONPATH"] = str(parent_dir)
 
 import shutil
 import tempfile
