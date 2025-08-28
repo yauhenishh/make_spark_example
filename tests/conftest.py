@@ -3,11 +3,15 @@ import sys
 from pathlib import Path
 
 # Add the parent directory to the Python path
-parent_dir = Path(__file__).parent.parent
-sys.path.insert(0, str(parent_dir))
+parent_dir = Path(__file__).parent.parent.resolve()
+if str(parent_dir) not in sys.path:
+    sys.path.insert(0, str(parent_dir))
 
-# Also set PYTHONPATH environment variable
-os.environ["PYTHONPATH"] = str(parent_dir)
+# Also set PYTHONPATH environment variable if not set
+if "PYTHONPATH" not in os.environ:
+    os.environ["PYTHONPATH"] = str(parent_dir)
+elif str(parent_dir) not in os.environ["PYTHONPATH"]:
+    os.environ["PYTHONPATH"] = f"{parent_dir}:{os.environ['PYTHONPATH']}"
 
 import shutil
 import tempfile

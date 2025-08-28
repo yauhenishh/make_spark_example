@@ -3,8 +3,9 @@ from setuptools import find_packages, setup
 setup(
     name="billups-data-analysis",
     version="1.0.0",
-    packages=find_packages(include=["src", "src.*"]),
+    packages=find_packages(where=".", include=["src", "src.*"]),
     package_dir={"": "."},
+    py_modules=["src"],
     install_requires=[
         "pyspark>=3.0.0",
         "pandas>=1.3.0",
