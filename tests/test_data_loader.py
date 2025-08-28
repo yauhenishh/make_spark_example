@@ -1,4 +1,3 @@
-import path_helper  # This sets up the path
 
 from src.data.loader import DataLoader
 

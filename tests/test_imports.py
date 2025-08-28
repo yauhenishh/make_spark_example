@@ -1,6 +1,5 @@
 """Test to verify imports work correctly."""
 
-import path_helper  # This sets up the path
 import os
 
 

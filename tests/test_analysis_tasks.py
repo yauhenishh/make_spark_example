@@ -1,4 +1,3 @@
-import path_helper  # This sets up the path
 
 import pytest
 
