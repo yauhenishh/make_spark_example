@@ -106,7 +106,7 @@ def write_to_hive(
         the Spark optimizer has accurate information for query planning.
     """
     # Create database if not exists
-    spark = df.sql_ctx.sparkSession
+    spark: SparkSession = df.sql_ctx.sparkSession  # type: ignore
     spark.sql(f"CREATE DATABASE IF NOT EXISTS {database}")
 
     # Write to Hive table
