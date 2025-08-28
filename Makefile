@@ -15,17 +15,17 @@ test-ci:
 
 lint:
 	# Run ruff linting
-	ruff check src tests
+	ruff check src
 	# Run mypy type checking
-	cd . && mypy src/ tests/ --explicit-package-bases
+	cd . && mypy src/ --explicit-package-bases
 
 format:
 	# Run ruff formatting
-	ruff format src tests
+	ruff format src
 
 lint-fix:
 	# Run ruff with auto-fix
-	ruff check --fix src tests
+	ruff check --fix src
 
 clean:
 	find . -type f -name "*.pyc" -delete

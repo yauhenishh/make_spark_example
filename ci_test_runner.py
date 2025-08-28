@@ -40,8 +40,8 @@ def main():
     # Run tests
     print("\n=== Running tests ===")
     test_cmd = [
-        sys.executable, "-m", "pytest", "tests/", 
-        "-v", "--tb=short", 
+        sys.executable, "-m", "pytest", "tests/",
+        "-v", "--tb=short",
         "--cov=src", "--cov-report=term", "--cov-report=xml"
     ]
     test_result = run_command(test_cmd)
