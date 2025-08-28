@@ -1,8 +1,13 @@
+import os
 import sys
 from pathlib import Path
 
-# Add the src directory to the Python path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Add the parent directory to the Python path
+parent_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(parent_dir))
+
+# Also set PYTHONPATH environment variable
+os.environ['PYTHONPATH'] = str(parent_dir)
 
 import shutil
 import tempfile
